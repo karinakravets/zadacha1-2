@@ -1,14 +1,23 @@
 fun main() {
-    println("Кол-во разных символов в строке по алфавиту: " + vtoraya(readln()))
-}
-fun vtoraya(string: String): String {
-    var result = ""
-    val charCount = mutableMapOf<Char, Int>()
-    string.forEach { char ->
-        charCount[char] = charCount.getOrDefault(char, 0) + 1
+    print("Введите строку: ")
+    val inputString = readLine()?.toUpperCase()
+
+    if (inputString != null) {
+        val charMap = mutableMapOf<Char, Int>()
+
+        for (char in inputString) {
+            val count = charMap[char]
+            if (count == null) {
+                charMap[char] = 1
+            } else {
+                charMap[char] = count + 1
+            }
+        }
+
+        val sortedMap = charMap.toSortedMap()
+
+        for ((char, count) in sortedMap) {
+            println("$char - $count")
+        }
     }
-    charCount.toSortedMap().forEach { (char, count) ->
-        result += "$char - $count\n"
-    }
-    return result
 }
